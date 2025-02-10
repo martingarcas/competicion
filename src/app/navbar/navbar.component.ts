@@ -1,5 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
+import { LoginService } from '../login.service';
 
 @Component({
   selector: 'app-navbar',
@@ -9,23 +11,25 @@ import { Component } from '@angular/core';
 })
 export class NavbarComponent {
 
-  logged:boolean;
   nombre:string;
   perfil: string;
 
-  constructor() {
+  constructor(private route:Router, private servicio:LoginService) {
 
-    this.logged = true;
-    this.nombre="Martin";
-    this.perfil = "admin";
+    this.nombre="";
+    this.perfil = "";
   }
 
   logout() {
-    this.logged = false;
+    this.servicio.logout();
   }
 
   login() {
-    this.logged = true;
+    this.route.navigate(['/login']);
+  }
+
+  isLogged() {
+    return this.servicio.isLogged();
   }
 
 }

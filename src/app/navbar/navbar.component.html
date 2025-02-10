@@ -4,17 +4,17 @@
 
 		<ul class="menu-options">
 
-			<li *ngIf="logged && perfil=='admin'">Menú 1 Admin</li>
-			<li *ngIf="logged && perfil=='admin'">Menú 2 Admin</li>
-			<li *ngIf="logged && perfil=='experto'">Menú 1 Experto</li>
-			<li *ngIf="logged && perfil=='experto'">Menú 2 Experto</li>
+			<li *ngIf="isLogged() && perfil=='admin'">Menú 1 Admin</li>
+			<li *ngIf="isLogged() && perfil=='admin'">Menú 2 Admin</li>
+			<li *ngIf="isLogged() && perfil=='experto'">Menú 1 Experto</li>
+			<li *ngIf="isLogged() && perfil=='experto'">Menú 2 Experto</li>
 
 		</ul>
 
 		<ul class="menu-login">
 
-			<li *ngIf="logged">{{nombre}}<button (click)="logout()">LOGOUT</button></li>
-			<li *ngIf="!logged"><button (click)="login()">LOGIN</button></li>
+			<li *ngIf="isLogged()">{{nombre}}<button (click)="logout()">LOGOUT</button></li>
+			<li *ngIf="!isLogged()"><button (click)="login()">LOGIN</button></li>
 			
 		</ul>
 
