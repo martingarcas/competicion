@@ -95,5 +95,16 @@ export class LoginService {
 
     return respuesta;
   }
+
+  getNombre():string {
+    let respuesta:string = "";
+    let cont:string|null = sessionStorage.getItem("LOGIN");
+
+    if (cont) {
+      respuesta = JSON.parse(cont||"").usuario.nombre;
+    }
+
+    return respuesta;
+  }
   
 }
