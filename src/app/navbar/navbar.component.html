@@ -13,7 +13,7 @@
 
 		<ul class="menu-login">
 
-			<li *ngIf="isLogged()">{{nombre}}<button (click)="logout()">LOGOUT</button></li>
+			<li *ngIf="isLogged()">{{getNombre()}}<button (click)="logout()">LOGOUT</button></li>
 			<li *ngIf="!isLogged()"><button (click)="login()">LOGIN</button></li>
 			
 		</ul>

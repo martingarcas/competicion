@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { map } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -58,18 +59,20 @@ export class LoginService {
     }
   }
 
-  login(user:string, pass:string) {
+  login(user:string, pass:string):Observable<any> {
     let objeto:any;
     objeto = this;
-    this.http.post("http://localhost/servidortest/login.php", 
+    return this.http.post("http://localhost/servidortest/login.php", 
                           {user:user,pass:pass}
-    ).subscribe(function(data:any) {
-      objeto.usuario  = {"nombre": data.user} 
-      objeto.perfil   = data.perfil;
-      objeto.token    = data.token;
-      objeto.logueado = true;
-      objeto.almacenar();     
-    });
+    ).pipe(
+      map((data:any) => {
+        objeto.usuario  = {"nombre": data.user} 
+        objeto.perfil   = data.perfil;
+        objeto.token    = data.token;
+        objeto.logueado = true;
+        objeto.almacenar();    
+      })
+    )
   }
 
   private machacar() {

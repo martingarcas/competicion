@@ -30,8 +30,11 @@ export class NavbarComponent {
   }
 
   isLogged() {
-    this.nombre = this.servicio.getNombre();
     return this.servicio.isLogged();
+  }
+
+  getNombre() {
+    return this.servicio.getNombre();
   }
 
 }
