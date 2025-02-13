@@ -23,6 +23,7 @@ export class NavbarComponent {
   logout() {
     this.servicio.logout();
     this.nombre = "";
+    this.route.navigate(['/']);
   }
 
   login() {

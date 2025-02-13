@@ -1,1 +1,11 @@
-<p>lista-competidores works!</p>
+<div *ngIf="participantes.length > 0; else noData">
+	<ul>
+	  <li *ngFor="let participante of participantes">
+		{{ participante.nombre }} {{ participante.apellidos }} ({{ participante.centro }})
+	  </li>
+	</ul>
+  </div>
+  <ng-template #noData>
+	<p>No hay participantes disponibles.</p>
+  </ng-template>
+  

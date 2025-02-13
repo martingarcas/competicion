@@ -66,11 +66,19 @@ export class LoginService {
                           {user:user,pass:pass}
     ).pipe(
       map((data:any) => {
-        objeto.usuario  = {"nombre": data.user} 
-        objeto.perfil   = data.perfil;
-        objeto.token    = data.token;
-        objeto.logueado = true;
-        objeto.almacenar();    
+
+        if (data != null && data.token != "") {
+          objeto.usuario  = {"nombre": data.user} 
+          objeto.perfil   = data.rol;
+          objeto.token    = data.token;
+          objeto.logueado = true;
+          objeto.almacenar(); 
+          return {"funciona": true, "perfil": data.rol};
+
+        } else {
+          return {"funciona": false};
+        }
+   
       })
     )
   }

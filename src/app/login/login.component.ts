@@ -20,8 +20,13 @@ export class LoginComponent {
   }
 
   loguear():void {
-    this.loginService.login(this.usuario, this.contrasenna).subscribe(() => {
-      this.route.navigate(["/"])
+    this.loginService.login(this.usuario, this.contrasenna).subscribe((v) => {
+      if (v.funciona) {
+        this.route.navigate(["/" + v.perfil]);
+      } else {
+        alert("Error en la autenticación");
+      }
+
     });
   }
   
