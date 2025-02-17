@@ -118,4 +118,15 @@ export class LoginService {
     return respuesta;
   }
   
+
+  getPerfil():string {
+    let respuesta:string = "";
+    let cont:string|null = sessionStorage.getItem("LOGIN");
+
+    if (cont) {
+      respuesta = JSON.parse(cont||"").perfil;
+    }
+
+    return respuesta;
+  }
 }
