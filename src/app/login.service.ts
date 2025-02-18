@@ -62,18 +62,22 @@ export class LoginService {
   login(user:string, pass:string):Observable<any> {
     let objeto:any;
     objeto = this;
-    return this.http.post("http://localhost/servidortest/login.php", 
-                          {user:user,pass:pass}
+    return this.http.post("http://localhost:9000/auth/login", 
+                          {username:user,password:pass}
     ).pipe(
       map((data:any) => {
 
         if (data != null && data.token != "") {
-          objeto.usuario  = {"nombre": data.user} 
-          objeto.perfil   = data.rol;
+          objeto.usuario  = {"nombre": data.username}
+          if (data.authorities[0] == "ROLE_EXPERTO") {
+            objeto.perfil = "experto";
+          } else {
+            objeto.perfil = "admin";
+          }
           objeto.token    = data.token;
           objeto.logueado = true;
           objeto.almacenar(); 
-          return {"funciona": true, "perfil": data.rol};
+          return {"funciona": true, "perfil": objeto.perfil};
 
         } else {
           return {"funciona": false};
