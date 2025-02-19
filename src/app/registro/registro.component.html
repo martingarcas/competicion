@@ -1,6 +1,13 @@
 <div>
 	<h2>Registrar nuevo usuario</h2>
 	<form (ngSubmit)="registrarUsuario()">
+	  
+	  <label for="nombre">Nombre:</label>
+	  <input id="nombre" [(ngModel)]="nombre" name="nombre" required />
+  
+	  <label for="apellidos">Apellidos:</label>
+	  <input id="apellidos" [(ngModel)]="apellidos" name="apellidos" required />
+  
 	  <label for="usuario">Nombre de usuario:</label>
 	  <input id="usuario" [(ngModel)]="usuario" name="usuario" required />
   
@@ -9,6 +16,11 @@
   
 	  <label for="email">Email:</label>
 	  <input type="email" id="email" [(ngModel)]="email" name="email" required />
+  
+	  <label for="especialidad">Especialidad:</label>
+	  <select id="especialidad" [(ngModel)]="especialidadId" name="especialidadId" required>
+		<option *ngFor="let esp of especialidades" [value]="esp.idEspecialidad">{{ esp.nombre }}</option>
+	  </select>
   
 	  <button type="submit">Registrar</button>
 	</form>

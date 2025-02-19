@@ -30,6 +30,8 @@ export class LoginService {
     }
 
     sessionStorage.setItem("LOGIN", JSON.stringify(objeto));
+    // Asegurar que el token también se guarda directamente con su clave
+    sessionStorage.setItem("token", this.token);
   }
 
   recuperar() {
