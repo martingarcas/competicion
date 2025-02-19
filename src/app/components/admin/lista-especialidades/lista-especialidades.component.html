@@ -1,0 +1,37 @@
+<table>
+	<thead>
+	  <tr>
+		<th>Nombre</th>
+		<th>Código</th>
+		<th>Acciones</th>
+	  </tr>
+	</thead>
+	<tbody>
+	  <tr *ngFor="let especialidad of especialidades">
+		<td>{{ especialidad.nombre }}</td>
+		<td>{{ especialidad.codigo }}</td>
+		<td>
+		  <button (click)="seleccionarEspecialidad(especialidad)">Editar</button>
+		</td>
+	  </tr>
+	</tbody>
+  </table>
+  
+  <!-- Formulario de edición -->
+  <div *ngIf="especialidadSeleccionada">
+	<h3>Editar Especialidad</h3>
+	<label>Nombre:</label>
+	<input [(ngModel)]="especialidadSeleccionada.nombre" />
+	
+	<label>Código:</label>
+	<input [(ngModel)]="especialidadSeleccionada.codigo" />
+	
+	<button (click)="guardarEdicion()">Guardar</button>
+	<button (click)="cancelarEdicion()">Cancelar</button>
+  </div>
+
+  <button class="btn btn-secondary mb-3" (click)="volver()">
+	← Volver
+  </button>
+  
+  

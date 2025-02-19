@@ -1,0 +1,20 @@
+<div>
+	<h2>Registrar nueva especialidad</h2>
+	<form (ngSubmit)="crearEspecialidad()">
+	  <label for="nombre">Nombre:</label>
+	  <input id="nombre" [(ngModel)]="nombre" name="nombre" required />
+  
+	  <label for="codigo">Código:</label>
+	  <input id="codigo" [(ngModel)]="codigo" name="codigo" required />
+  
+	  <button type="submit">Registrar</button>
+	</form>
+  
+	<div *ngIf="mensaje" class="error">
+	  {{ mensaje }}
+	</div>
+	<button class="btn btn-secondary mb-3" (click)="volver()">
+		← Volver
+	  </button>
+</div>
+  

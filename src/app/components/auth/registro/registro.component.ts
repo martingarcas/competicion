@@ -2,7 +2,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { RegistroService } from '../registro.service';
+import { RegistroService } from '../../../registro.service';
 
 @Component({
   selector: 'app-registro',
@@ -20,7 +20,7 @@ export class RegistroComponent implements OnInit {
   especialidadId: number | null = null;
   especialidades: any[] = []; // Lista de especialidades
   errorMessage: string = '';
-
+ 
   constructor(private registroService: RegistroService, private router: Router) { }
 
   ngOnInit(): void {
@@ -62,4 +62,9 @@ export class RegistroComponent implements OnInit {
       }
     });
   }
+
+  volver() {
+    this.router.navigate(['/admin']);  // Cambia esto según la ruta a la que quieras volver
+  }
+
 }

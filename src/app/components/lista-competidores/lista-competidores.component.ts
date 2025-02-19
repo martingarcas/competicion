@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ParticipanteService } from '../participante.service';
+import { ParticipanteService } from '../../participante.service';
 import { CommonModule } from '@angular/common';
 
 @Component({
