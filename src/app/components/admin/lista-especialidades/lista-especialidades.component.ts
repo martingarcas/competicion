@@ -59,7 +59,7 @@ export class ListaEspecialidadesComponent implements OnInit {
   }
 
   volver() {
-    this.router.navigate(['/admin']);
+    window.history.back();
   }
 
 }

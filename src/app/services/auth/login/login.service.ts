@@ -1,12 +1,14 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { map } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class LoginService {
+
+  private perfilSubject = new BehaviorSubject<string | null>(this.getPerfilDesdeStorage());
 
   token:string;
   perfil:string;
@@ -18,6 +20,7 @@ export class LoginService {
     this.perfil   = "";
     this.logueado = false;
     this.usuario  = {};
+    this.recuperar(); // Asegurar que al iniciar, cargamos los datos de sessionStorage
   }
 
   private almacenar() {
@@ -32,6 +35,8 @@ export class LoginService {
     sessionStorage.setItem("LOGIN", JSON.stringify(objeto));
     // Asegurar que el token también se guarda directamente con su clave
     sessionStorage.setItem("token", this.token);
+
+    this.perfilSubject.next(this.perfil); // 🔥 Notificar cambio de perfil
   }
 
   recuperar() {
@@ -59,6 +64,8 @@ export class LoginService {
       this.usuario  = {};
 
     }
+
+    this.perfilSubject.next(this.perfil); // 🔥 Notificar el perfil al iniciar
   }
 
   login(user:string, pass:string):Observable<any> {
@@ -91,16 +98,19 @@ export class LoginService {
 
   private machacar() {
     sessionStorage.removeItem("LOGIN");
+    sessionStorage.removeItem("token");
+    this.perfil = "";
+    this.logueado = false;
+    this.usuario = {};
+
+    this.perfilSubject.next(null); // 🔥 Notificar que ya no hay usuario logueado
   }
 
   logout() {
-    let objeto:any = this;
-    let cont:string|null = sessionStorage.getItem("LOGIN");
-    this.http.get("http://localhost/servidortest/login.php?desloguear=" + JSON.parse(cont||"").token)
-              .subscribe(function(data) {
-                objeto.machacar();
-              });
+
+    this.machacar();
   }
+  
 
   isLogged():boolean {
     let respuesta:boolean = false;
@@ -135,4 +145,15 @@ export class LoginService {
 
     return respuesta;
   }
+
+  private getPerfilDesdeStorage(): string | null {
+    const cont = sessionStorage.getItem("LOGIN");
+    return cont ? JSON.parse(cont).perfil : null;
+  }
+
+  // 🚀 Nueva forma de obtener el perfil como observable
+  get perfilObservable() {
+    return this.perfilSubject.asObservable();
+  }
+
 }

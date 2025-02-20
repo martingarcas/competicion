@@ -39,7 +39,7 @@ export class EspecialidadFormComponent {
   }
 
   volver() {
-    this.router.navigate(['/admin']);
+    window.history.back();
   }
 
 }

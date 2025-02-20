@@ -2,7 +2,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { RegistroService } from '../../../registro.service';
+import { RegistroService } from '../../../services/auth/register/registro.service';
 
 @Component({
   selector: 'app-registro',

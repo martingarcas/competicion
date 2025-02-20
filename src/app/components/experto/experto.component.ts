@@ -3,17 +3,16 @@ import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
 
 @Component({
-  selector: 'app-admin',
+  selector: 'app-experto',
   standalone: true,
   imports: [CommonModule],
-  templateUrl: './admin.component.html',
-  styleUrls: ['./admin.component.css']
+  templateUrl: './experto.component.html',
+  styleUrls: ['./experto.component.css']
 })
-export class AdminComponent {
+export class ExpertoComponent {
   constructor(private router: Router) {}
 
   goTo(ruta: string) {
-    this.router.navigate([`/admin/${ruta}`]);
+    this.router.navigate([`/experto/${ruta}`]);
   }
-  
 }

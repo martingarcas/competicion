@@ -1,0 +1,59 @@
+<h2>Lista de Expertos</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th>Usuario</th>
+      <th>Nombre</th>
+      <th>Email</th>
+      <th>Rol</th>
+      <th>Especialidad</th>
+      <th>Acciones</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let experto of expertos">
+      <td>{{ experto.username }}</td>
+      <td>{{ experto.nombre }} {{ experto.apellidos }}</td>
+      <td>{{ experto.email }}</td>
+      <td>{{ experto.role }}</td>
+      <td>{{ obtenerNombreEspecialidad(experto.especialidadId) }}</td>
+      <td>
+        <button (click)="editarExperto(experto)">✏️ Editar</button>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<!-- Formulario de Edición -->
+<div *ngIf="expertoSeleccionado">
+  <h3>Editar Experto</h3>
+  <form (ngSubmit)="guardarCambios()">
+    <label>Nombre:</label>
+    <input [(ngModel)]="expertoSeleccionado.nombre" name="nombre" required />
+
+    <label>Apellidos:</label>
+    <input [(ngModel)]="expertoSeleccionado.apellidos" name="apellidos" required />
+
+    <label>Email:</label>
+    <input [(ngModel)]="expertoSeleccionado.email" name="email" required />
+
+    <label>Rol:</label>
+    <select [(ngModel)]="expertoSeleccionado.role" name="role">
+      <option value="experto">Experto</option>
+      <option value="admin">Administrador</option>
+    </select>
+
+    <label>Especialidad:</label>
+    <select [(ngModel)]="expertoSeleccionado.especialidadId" name="especialidad">
+      <option *ngFor="let esp of especialidades" [value]="esp.idEspecialidad">
+        {{ esp.nombre }}
+      </option>
+    </select>
+
+    <button type="submit">Guardar</button>
+    <button type="button" (click)="cancelarEdicion()">Cancelar</button>
+  </form>
+</div>
+
+<button class="btn btn-secondary mb-3" (click)="volver()">← Volver</button>

@@ -1,0 +1,48 @@
+<table>
+	<thead>
+	  <tr>
+		<th>Nombre</th>
+		<th>Centro</th>
+		<th>Especialidad</th>
+		<th *ngIf="perfil=='experto'">Acciones</th>
+	  </tr>
+	</thead>
+	<tbody>
+	  <tr *ngFor="let participante of participantes">
+		<td>{{ participante.nombre }}</td>
+		<td>{{ participante.centro }}</td>
+		<td>{{ participante.especialidadId }}</td>
+		<td *ngIf="perfil=='experto'">
+		  <button (click)="seleccionarParticipante(participante)">Editar</button>
+		</td>
+	  </tr>
+	</tbody>
+  </table>
+  
+  <!-- Formulario de Edición -->
+  <div *ngIf="participanteSeleccionado">
+	<h3>Editar Participante</h3>
+  
+	<label>Nombre:</label>
+	<input [(ngModel)]="participanteSeleccionado.nombre" />
+  
+	<label>Centro:</label>
+	<input [(ngModel)]="participanteSeleccionado.centro" />
+  
+	<label>Especialidad:</label>
+	<select [(ngModel)]="participanteSeleccionado.especialidadId">
+	<option *ngFor="let especialidad of especialidades" [value]="especialidad.idEspecialidad">
+		{{ especialidad.nombre }}
+	</option>
+	</select>
+
+  
+	<button (click)="guardarEdicion()">Guardar</button>
+	<button (click)="cancelarEdicion()">Cancelar</button>
+  </div>
+
+  
+  <button class="btn btn-secondary mb-3" (click)="volver()" *ngIf="autenticado">
+	← Volver
+  </button>
+  
