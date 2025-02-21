@@ -1,0 +1,16 @@
+<form (ngSubmit)="crearPrueba()" enctype="multipart/form-data">
+  
+	<label for="puntuacionMaxima">Puntuación Máxima:</label>
+	<input type="number" id="puntuacionMaxima" [(ngModel)]="puntuacionMaxima" name="puntuacionMaxima" required />
+  
+	<label for="enunciado">Enunciado (PDF):</label>
+	<input type="file" id="enunciado" (change)="seleccionarArchivo($event)" accept="application/pdf" required />
+  
+	<button type="submit">Crear Prueba</button>
+	<p *ngIf="mensaje">{{ mensaje }}</p>
+  </form>
+  
+  <button class="btn btn-secondary mb-3" (click)="volver()">
+	← Volver
+  </button>
+  

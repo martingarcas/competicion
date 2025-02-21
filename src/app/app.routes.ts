@@ -10,6 +10,8 @@ import { ParticipanteComponent } from './components/experto/participante/partici
 import { ExpertoComponent } from './components/experto/experto.component';
 import { ParticipanteFormComponent } from './components/experto/participante-form/participante-form.component';
 import { ListaExpertosComponent } from './components/admin/lista-expertos/lista-expertos.component';
+import { PruebaFormComponent } from './components/experto/prueba-form/prueba-form.component';
+import { ListaPruebasComponent } from './components/experto/lista-pruebas/lista-pruebas.component';
 
 export const routes: Routes = [
 
@@ -23,5 +25,7 @@ export const routes: Routes = [
 	{ path: 'admin/expertos', component: ListaExpertosComponent, canActivate: [guardianAdminGuard] },
 	{ path: "experto", component: ExpertoComponent, canActivate: [guardianExpertoGuard], pathMatch: "full" },
 	{ path: "experto/participantes", component: ParticipanteComponent, canActivate: [guardianExpertoGuard], pathMatch: "full" },
-	{ path: 'experto/crear-participante', component: ParticipanteFormComponent, canActivate: [guardianExpertoGuard], pathMatch: "full" }
+	{ path: 'experto/crear-participante', component: ParticipanteFormComponent, canActivate: [guardianExpertoGuard], pathMatch: "full" },
+	{ path: "experto/crear-prueba", component: PruebaFormComponent, canActivate: [guardianExpertoGuard], pathMatch: "full"},
+	{ path: "experto/pruebas", component: ListaPruebasComponent, canActivate: [guardianExpertoGuard], pathMatch: "full"},
 ];

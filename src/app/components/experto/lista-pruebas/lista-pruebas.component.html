@@ -1,0 +1,24 @@
+<h2>Mis Pruebas</h2>
+
+<table *ngIf="pruebas.length > 0; else noPruebas">
+  <tr>
+    <th>ID</th>
+    <th>Puntuación Máxima</th>
+    <th>Enunciado</th>
+  </tr>
+  <tr *ngFor="let prueba of pruebas">
+    <td>{{ prueba.idPrueba }}</td>
+    <td>{{ prueba.puntuacionMaxima }}</td>
+    <td>
+		<button (click)="descargarEnunciado(prueba.enunciado, 'enunciado_' + prueba.idPrueba + '.pdf')">
+		  Descargar Enunciado
+		</button>
+	</td>
+  </tr>
+</table>
+
+<ng-template #noPruebas>
+  <p>No hay pruebas registradas para tu especialidad.</p>
+</ng-template>
+
+<button (click)="volver()">Volver</button>

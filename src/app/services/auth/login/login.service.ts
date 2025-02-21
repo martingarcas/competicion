@@ -14,12 +14,14 @@ export class LoginService {
   perfil:string;
   logueado:boolean;
   usuario:any;
+  especialidadId: number | null; // 🔥 Nuevo atributo
 
   constructor(private http:HttpClient) { 
     this.token    = "";
     this.perfil   = "";
     this.logueado = false;
     this.usuario  = {};
+    this.especialidadId = null; // Inicializamos como null
     this.recuperar(); // Asegurar que al iniciar, cargamos los datos de sessionStorage
   }
 
@@ -29,7 +31,8 @@ export class LoginService {
       token:this.token,
       perfil:this.perfil,
       logueado:this.logueado,
-      usuario:this.usuario
+      usuario:this.usuario,
+      especialidadId: this.especialidadId
     }
 
     sessionStorage.setItem("LOGIN", JSON.stringify(objeto));
@@ -54,6 +57,7 @@ export class LoginService {
         this.perfil   = objeto.perfil;
         this.logueado = objeto.logueado;
         this.usuario  = objeto.usuario;
+        this.especialidadId = objeto.especialidadId || null;
       }
 
     } else {
@@ -62,6 +66,7 @@ export class LoginService {
       this.token    = "";
       this.perfil   = "";
       this.usuario  = {};
+      this.especialidadId = null;
 
     }
 
@@ -85,6 +90,7 @@ export class LoginService {
           }
           objeto.token    = data.token;
           objeto.logueado = true;
+          this.especialidadId = data.especialidadId || null;
           objeto.almacenar(); 
           return {"funciona": true, "perfil": objeto.perfil};
 
@@ -96,11 +102,16 @@ export class LoginService {
     )
   }
 
+  getEspecialidadId(): number | null {
+    return this.especialidadId;
+  }
+
   private machacar() {
     sessionStorage.removeItem("LOGIN");
     sessionStorage.removeItem("token");
     this.perfil = "";
     this.logueado = false;
+    this.especialidadId = null;
     this.usuario = {};
 
     this.perfilSubject.next(null); // 🔥 Notificar que ya no hay usuario logueado
