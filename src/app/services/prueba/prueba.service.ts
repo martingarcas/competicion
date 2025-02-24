@@ -37,12 +37,8 @@ export class PruebaService {
   }
 
   descargarEnunciado(pruebaId: number): Observable<Blob> {
-    const headers = new HttpHeaders({
-      'Authorization': `Bearer ${sessionStorage.getItem('TOKEN')}`
-    });
-  
-    return this.http.get(`http://localhost:9000/api/pruebas/${pruebaId}/descargar`, {
-      headers,
+    return this.http.get(`http://localhost:9000/api/pruebas/descargar/${pruebaId}`, {
+      headers: this.obtenerHeaders(),
       responseType: 'blob'
     });
   }

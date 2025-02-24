@@ -10,7 +10,7 @@
     <td>{{ prueba.idPrueba }}</td>
     <td>{{ prueba.puntuacionMaxima }}</td>
     <td>
-		<button (click)="descargarEnunciado(prueba.enunciado, 'enunciado_' + prueba.idPrueba + '.pdf')">
+    <button (click)="descargarEnunciado(prueba.idPrueba)">
 		  Descargar Enunciado
 		</button>
 	</td>

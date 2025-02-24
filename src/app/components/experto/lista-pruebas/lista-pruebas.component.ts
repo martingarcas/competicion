@@ -61,16 +61,17 @@ export class ListaPruebasComponent {
     window.history.back();
   }
 
-  descargarEnunciado(pruebaId: number, nombreArchivo: string): void {
+  descargarEnunciado(pruebaId: number): void {
     this.pruebaService.descargarEnunciado(pruebaId).subscribe({
       next: (response) => {
         const blob = new Blob([response], { type: 'application/pdf' });
         const url = window.URL.createObjectURL(blob);
         const link = document.createElement('a');
         link.href = url;
-        link.download = nombreArchivo;
-        console.log(nombreArchivo);
-        
+  
+        // Nombre del archivo ya está en la base de datos y backend lo maneja
+        link.download = `enunciado_${pruebaId}.pdf`;
+  
         link.click();
         window.URL.revokeObjectURL(url);
       },
@@ -78,6 +79,6 @@ export class ListaPruebasComponent {
         console.error('Error al descargar el enunciado:', err);
       }
     });
-  }  
+  }    
 
 }
