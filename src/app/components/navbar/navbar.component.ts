@@ -23,12 +23,11 @@ export class NavbarComponent {
   }
 
   ngOnInit() {  
-    // Cargar valores iniciales al inicio
     this.nombre = this.servicio.getNombre();
     this.perfil = this.servicio.getPerfil();
     this.especialidadNombre = this.servicio.getEspecialidadNombre() || "";
 
-    // Suscribirse a cambios en el perfil para actualizar dinámicamente
+    // Suscribirse a cambios en el perfil para actualizar dinámicamente sin necsidad de recarga
     this.servicio.perfilObservable.subscribe(perfil => {
       this.perfil = perfil || "";
       this.nombre = this.servicio.getNombre();

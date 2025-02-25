@@ -11,19 +11,17 @@ export class ParticipanteService {
   constructor(private http: HttpClient) {}
 
   private getHeaders(): HttpHeaders {
-    const token = sessionStorage.getItem('token'); // Obtiene el token de la sesión
+    const token = sessionStorage.getItem('token');
     return new HttpHeaders({
       'Authorization': `Bearer ${token}`,
       'Content-Type': 'application/json'
     });
   }
 
-  // ✅ Cualquier usuario puede ver la lista de participantes (SIN token)
   getParticipantes(): Observable<any[]> {
     return this.http.get<any[]>(this.apiUrl);
   }
 
-  // ❗ Requiere autenticación (token)
   getParticipanteById(id: number): Observable<any> {
     return this.http.get<any>(`${this.apiUrl}/${id}`, { headers: this.getHeaders() });
   }

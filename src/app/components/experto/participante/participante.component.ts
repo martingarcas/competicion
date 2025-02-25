@@ -15,21 +15,21 @@ import { Router } from '@angular/router';
 })
 export class ParticipanteComponent implements OnInit {
   participantes: any[] = [];
-  especialidades: any[] = []; // Lista de especialidades
+  especialidades: any[] = [];
   participanteSeleccionado: any = null;
   perfil: string = '';
   autenticado: boolean = false;
 
   constructor(
     private participanteService: ParticipanteService,
-    private especialidadService: EspecialidadService, // Servicio de especialidades
+    private especialidadService: EspecialidadService,
     private loginService: LoginService,
     private router: Router,
   ) {}
 
   ngOnInit(): void {
     this.cargarParticipantes();
-    this.cargarEspecialidades(); // Cargar especialidades
+    this.cargarEspecialidades();
     this.perfil = this.loginService.perfil;
     this.autenticado = this.loginService.isLogged();
   }
@@ -61,7 +61,7 @@ export class ParticipanteComponent implements OnInit {
 
   seleccionarParticipante(participante: any): void {
     if (this.perfil === 'experto') {
-      this.participanteSeleccionado = { ...participante }; // Copia del participante seleccionado
+      this.participanteSeleccionado = { ...participante };
     }
   }
 

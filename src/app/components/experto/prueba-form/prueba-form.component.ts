@@ -14,7 +14,7 @@ import { Router } from '@angular/router';
 export class PruebaFormComponent implements OnInit {
   enunciado!: File | null;
   especialidadId: number | null = null;
-  puntuacionMaxima: number | null = null; // ✅ Nuevo campo
+  puntuacionMaxima: number | null = null;
   mensaje: string = '';
 
   constructor(
@@ -51,13 +51,13 @@ export class PruebaFormComponent implements OnInit {
     const formData = new FormData();
     formData.append('enunciado', this.enunciado);
     formData.append('especialidadId', this.especialidadId.toString());
-    formData.append('puntuacionMaxima', this.puntuacionMaxima.toString()); // ✅ Nuevo campo
+    formData.append('puntuacionMaxima', this.puntuacionMaxima.toString());
 
     this.pruebaService.crearPrueba(formData).subscribe({
       next: () => {
         this.mensaje = 'Prueba creada con éxito';
         this.enunciado = null;
-        this.puntuacionMaxima = null; // Limpiar campo
+        this.puntuacionMaxima = null;
       },
       error: () => {
         this.mensaje = 'Error al crear la prueba';

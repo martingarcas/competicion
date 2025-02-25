@@ -18,7 +18,7 @@ export class RegistroComponent implements OnInit {
   password: string = '';
   email: string = '';
   especialidadId: number | null = null;
-  especialidades: any[] = []; // Lista de especialidades
+  especialidades: any[] = [];
   errorMessage: string = '';
  
   constructor(private registroService: RegistroService, private router: Router) { }
@@ -64,7 +64,7 @@ export class RegistroComponent implements OnInit {
   }
 
   volver() {
-    this.router.navigate(['/admin']);  // Cambia esto según la ruta a la que quieras volver
+    this.router.navigate(['/admin']);
   }
 
 }

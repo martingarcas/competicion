@@ -18,11 +18,11 @@ export class ParticipanteFormComponent implements OnInit {
   especialidadId: number | null = null;
   mensaje: string = '';
 
-  especialidades: any[] = []; // Lista de especialidades
+  especialidades: any[] = [];
 
   constructor(
     private participanteService: ParticipanteService, 
-    private especialidadService: EspecialidadService, // Inyectar servicio
+    private especialidadService: EspecialidadService,
     private router: Router
   ) {}
 

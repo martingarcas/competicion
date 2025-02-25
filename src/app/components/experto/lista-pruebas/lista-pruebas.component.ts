@@ -68,8 +68,7 @@ export class ListaPruebasComponent {
         const url = window.URL.createObjectURL(blob);
         const link = document.createElement('a');
         link.href = url;
-  
-        // Nombre del archivo ya está en la base de datos y backend lo maneja
+
         link.download = `enunciado_${pruebaId}.pdf`;
   
         link.click();

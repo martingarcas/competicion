@@ -24,7 +24,7 @@ export class LoginService {
     this.usuario  = {};
     this.especialidadId = null;
     this.especialidadNombre = null;
-    this.recuperar(); // Asegurar que al iniciar, cargamos los datos de sessionStorage
+    this.recuperar(); // Al iniciar, cargamos los datos de sessionStorage
   }
 
   private almacenar() {
@@ -74,7 +74,7 @@ export class LoginService {
 
     }
 
-    this.perfilSubject.next(this.perfil); // 🔥 Notificar el perfil al iniciar
+    this.perfilSubject.next(this.perfil); // Notificar el perfil al iniciar
   }
 
   login(user:string, pass:string):Observable<any> {
@@ -172,7 +172,7 @@ export class LoginService {
     return cont ? JSON.parse(cont).perfil : null;
   }
 
-  // 🚀 Nueva forma de obtener el perfil como observable
+  // Perfil observable
   get perfilObservable() {
     return this.perfilSubject.asObservable();
   }
