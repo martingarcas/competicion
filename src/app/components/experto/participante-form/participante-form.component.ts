@@ -27,20 +27,16 @@ export class ParticipanteFormComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.cargarEspecialidades(); // Llamar al método al iniciar
+    this.cargarEspecialidadDelExperto();
   }
 
-  cargarEspecialidades() {
-    this.especialidadService.obtenerEspecialidades().subscribe({
-      next: (data) => {
-        console.log('Especialidades recibidas:', data); // 👀 Ver en consola
-        this.especialidades = data;
-      },
-      error: (err) => {
-        console.error('Error al cargar especialidades', err);
-        this.mensaje = 'Error al cargar especialidades.';
-      }
-    });
+  cargarEspecialidadDelExperto() {
+    const storedLogin = sessionStorage.getItem('LOGIN');
+    if (storedLogin) {
+      const loginData = JSON.parse(storedLogin);
+      this.especialidadId = loginData.especialidadId || null;
+      console.log('Especialidad asignada automáticamente:', this.especialidadId);
+    }
   }
 
   crearParticipante() {
@@ -61,7 +57,6 @@ export class ParticipanteFormComponent implements OnInit {
         this.nombre = '';
         this.centro = '';
         this.especialidadId = null;
-        this.cargarEspecialidades(); // Recargar la lista después de crear
       },
       error: () => {
         this.mensaje = 'Error al crear el participante';

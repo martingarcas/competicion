@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { EspecialidadService } from '../../../services/especialidad/especialidad.service';
+import { EspecialidadService } from '../../services/especialidad/especialidad.service';
 import { Router } from '@angular/router';
+import { LoginService } from '../../services/auth/login/login.service';
 
 @Component({
   selector: 'app-lista-especialidades',
@@ -14,11 +15,13 @@ import { Router } from '@angular/router';
 export class ListaEspecialidadesComponent implements OnInit {
   especialidades: any[] = [];
   especialidadSeleccionada: any = null;
+  esAdmin: boolean = false;
 
-  constructor(private especialidadService: EspecialidadService, private router: Router) {}
+  constructor(private especialidadService: EspecialidadService, private router: Router, private loginService: LoginService) {}
 
   ngOnInit(): void {
     this.obtenerEspecialidades();
+    this.esAdmin = this.loginService.getPerfil() === 'admin';
   }
 
   obtenerEspecialidades(): void {

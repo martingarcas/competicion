@@ -11,7 +11,7 @@
 	  <tr *ngFor="let participante of participantes">
 		<td>{{ participante.nombre }}</td>
 		<td>{{ participante.centro }}</td>
-		<td>{{ participante.especialidadId }}</td>
+		<td>{{ participante.especialidadNombre }}</td>
 		<td *ngIf="perfil=='experto'">
 		  <button (click)="seleccionarParticipante(participante)">Editar</button>
 		</td>

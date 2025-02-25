@@ -5,14 +5,6 @@
 	<label for="centro">Centro:</label>
 	<input type="text" id="centro" [(ngModel)]="centro" name="centro" required />
   
-	<label for="especialidad">Especialidad:</label>
-	<select id="especialidad" [(ngModel)]="especialidadId" name="especialidadId" required>
-	  <option value="" disabled selected>Selecciona una especialidad</option>
-	  <option *ngFor="let especialidad of especialidades" [value]="especialidad.idEspecialidad">
-		{{ especialidad.nombre }}
-	  </option>
-	</select>
-  
 	<button type="submit">Crear Participante</button>
 	<p *ngIf="mensaje">{{ mensaje }}</p>
   </form>

@@ -15,4 +15,5 @@ export class ExpertoComponent {
   goTo(ruta: string) {
     this.router.navigate([`/experto/${ruta}`]);
   }
+  
 }

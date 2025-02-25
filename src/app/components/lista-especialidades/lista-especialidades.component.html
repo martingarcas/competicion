@@ -3,14 +3,14 @@
 	  <tr>
 		<th>Nombre</th>
 		<th>Código</th>
-		<th>Acciones</th>
+		<th *ngIf="esAdmin">Acciones</th>
 	  </tr>
 	</thead>
 	<tbody>
 	  <tr *ngFor="let especialidad of especialidades">
 		<td>{{ especialidad.nombre }}</td>
 		<td>{{ especialidad.codigo }}</td>
-		<td>
+		<td *ngIf="esAdmin">
 		  <button (click)="seleccionarEspecialidad(especialidad)">Editar</button>
 		</td>
 	  </tr>
@@ -18,7 +18,7 @@
   </table>
   
   <!-- Formulario de edición -->
-  <div *ngIf="especialidadSeleccionada">
+  <div *ngIf="esAdmin && especialidadSeleccionada">
 	<h3>Editar Especialidad</h3>
 	<label>Nombre:</label>
 	<input [(ngModel)]="especialidadSeleccionada.nombre" />

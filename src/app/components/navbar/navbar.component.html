@@ -8,6 +8,7 @@
 			<li *ngIf="isLogged() && perfil=='admin'">Menú 2 Admin</li>
 			<li *ngIf="isLogged() && perfil=='experto'">Menú 1 Experto</li>
 			<li *ngIf="isLogged() && perfil=='experto'">Menú 2 Experto</li>
+			<li *ngIf="isLogged() && perfil=='experto'">Especialidad: {{ especialidadNombre }}</li>
 
 		</ul>
 

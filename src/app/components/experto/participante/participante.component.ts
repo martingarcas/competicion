@@ -38,11 +38,14 @@ export class ParticipanteComponent implements OnInit {
     this.participanteService.getParticipantes().subscribe({
       next: (data) => {
         this.participantes = data;
+        console.log(data);
+        
       },
       error: (err) => {
         console.error('Error al obtener participantes:', err);
       }
     });
+    
   }
 
   cargarEspecialidades(): void {
