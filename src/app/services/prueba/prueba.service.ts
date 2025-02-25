@@ -25,9 +25,11 @@ export class PruebaService {
     return this.http.get<any>(`${this.apiUrl}/${id}`, { headers: this.obtenerHeaders() });
   }
 
-  crearPrueba(prueba: FormData): Observable<any> {
-    return this.http.post<any>(`${this.apiUrl}/crear`, prueba, { headers: this.obtenerHeaders() });
-  }
+  crearPrueba(formData: FormData): Observable<any> {
+    return this.http.post<any>(`${this.apiUrl}/crear`, formData, {
+      headers: this.obtenerHeaders(), 
+    });
+  }  
 
   obtenerPruebasPorEspecialidad(especialidadId: number): Observable<any[]> {
     return this.http.get<any[]>(`${this.apiUrl}/especialidad/${especialidadId}`, { headers: this.obtenerHeaders() });

@@ -5,6 +5,24 @@
   
 	<label for="enunciado">Enunciado (PDF):</label>
 	<input type="file" id="enunciado" (change)="seleccionarArchivo($event)" accept="application/pdf" required />
+
+	<h3>Ítems de la Prueba</h3>
+	<div *ngFor="let item of items; let i = index">
+
+		<label>Descripción:</label>
+    	<input type="text" [(ngModel)]="item.descripcion" name="descripcion{{i}}" required />
+
+		<label>Peso:</label>
+    	<input type="number" [(ngModel)]="item.peso" name="peso{{i}}" required />
+
+		<label>Grados de Consecución:</label>
+    	<input type="number" [(ngModel)]="item.gradosConsecucion" name="gradosConsecucion{{i}}" required />
+
+		<button type="button" (click)="eliminarItem(i)">Eliminar Ítem</button>
+
+	</div>
+
+  	<button type="button" (click)="agregarItem()">Añadir Ítem</button>
   
 	<button type="submit">Crear Prueba</button>
 	<p *ngIf="mensaje">{{ mensaje }}</p>

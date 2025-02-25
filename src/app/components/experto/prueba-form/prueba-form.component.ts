@@ -16,6 +16,7 @@ export class PruebaFormComponent implements OnInit {
   especialidadId: number | null = null;
   puntuacionMaxima: number | null = null;
   mensaje: string = '';
+  items: { descripcion: string, peso: number, gradosConsecucion: number }[] = [];
 
   constructor(
     private pruebaService: PruebaService,
@@ -40,6 +41,14 @@ export class PruebaFormComponent implements OnInit {
     console.log('Archivo seleccionado:', this.enunciado);
   }
 
+  agregarItem() {
+    this.items.push({ descripcion: '', peso: 0, gradosConsecucion: 1 });
+  }
+
+  eliminarItem(index: number) {
+    this.items.splice(index, 1);
+  }
+
   crearPrueba() {
     this.puntuacionMaxima = this.puntuacionMaxima ? Number(this.puntuacionMaxima) : null;
   
@@ -48,16 +57,29 @@ export class PruebaFormComponent implements OnInit {
       return;
     }
 
+    const sumaPesos = this.items.reduce((sum, item) => sum + item.peso, 0);
+    if (sumaPesos > this.puntuacionMaxima) {
+      this.mensaje = `La suma de los pesos (${sumaPesos}) no puede ser mayor que la puntuación máxima (${this.puntuacionMaxima}).`;
+      return;
+    }
+
     const formData = new FormData();
     formData.append('enunciado', this.enunciado);
     formData.append('especialidadId', this.especialidadId.toString());
     formData.append('puntuacionMaxima', this.puntuacionMaxima.toString());
+    formData.append('items', new Blob([JSON.stringify(this.items)], { type: 'application/json' }));
+
+    console.log("FormData enviado:");
+    formData.forEach((value, key) => {
+      console.log(key, value);
+    });
 
     this.pruebaService.crearPrueba(formData).subscribe({
       next: () => {
         this.mensaje = 'Prueba creada con éxito';
         this.enunciado = null;
         this.puntuacionMaxima = null;
+        this.items = [];
       },
       error: () => {
         this.mensaje = 'Error al crear la prueba';
