@@ -58,8 +58,8 @@ export class PruebaFormComponent implements OnInit {
     }
 
     const sumaPesos = this.items.reduce((sum, item) => sum + item.peso, 0);
-    if (sumaPesos > this.puntuacionMaxima) {
-      this.mensaje = `La suma de los pesos (${sumaPesos}) no puede ser mayor que la puntuación máxima (${this.puntuacionMaxima}).`;
+    if (sumaPesos !== this.puntuacionMaxima) {
+      this.mensaje = `El total de los pesos (${sumaPesos}) debe ser igual a la puntuación máxima (${this.puntuacionMaxima}).`;
       return;
     }
 
